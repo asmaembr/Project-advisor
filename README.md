@@ -4,34 +4,37 @@ This is our PFA (Projet de Fin d'Année) for our 5th year of computer studies.
 
 ## Project Description
 
-The **Project-Advisor** is designed to assist project supervisors in efficiently managing It provides tools for:
-**User Management:** advisors can create accounts and manage their profiles.
-**Project Proposal Submission:** Project owners can propose and submit ideas for their startup project and claculate the doability of their project .
+The **Project-Advisor** is designed to assist project supervisors in efficiently managing projects. It provides tools for:
 
-## Etude de faisabilité
+1. **User Management:** Advisors can create accounts and manage their projects.
+2. **Project Proposal Submission:** Project owners can propose and submit ideas for their startup projects and the system will predict if the project has potentiel or no.
 
-l'étude de faisabilité d'un projet ou un startup offerte par notre systéme permet à l'entrepreneur  de tester cette faisabilité selon deux critére :
-1- est ce que le projet est rentable ( valeur du profit est élevé en donnant une estimation )
-2- est ce que le projet à un potentiel d'être réussi de gagner une réputation parmi les TOP 500 dans le même domaine .
+## Feasibility Study
 
-le systéme aussi offre une fonctionnalité extensible pour les visiteurs et les entrepreneurs inscrits de tester leur profil entrepreneur à travers un questionnaire.
+The feasibility study offered by our system allows entrepreneurs to evaluate their projects based on two criteria:
+
+1. **Profitability:** Determine if the project is profitable by estimating its potential profit.
+2. **Potential for Success:** Assess if the project has the potential to gain a reputation among the TOP 500 projects in the same domain.
+
+Additionally, the system provides an extensible feature for visitors and registered entrepreneurs to evaluate their entrepreneurial profiles through a questionnaire.
 
 ## Features
 
 1. **User Management:**
-   - entrepreneurs can create accounts and manage their profiles.
+   - Entrepreneurs can create accounts and manage their profiles.
 
 2. **Project Management:**
-   - create a projet  , calculate the profit , check if the project can be a TOP 500 or no .
+   - Create a project, calculate its profit rank, and assess whether it has the potential to be among the TOP 500.
 
-3. **Visitors Features:**
-   - they can check if they are entrepreneur profils
+3. **Visitor Features:**
+   - Visitors can evaluate if they possess an entrepreneurial profile.
 
 ## Technology Stack
 
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Spring Boot
 - **Database:** PostgreSQL
+- **Machine Learning** Sklearn (Kneignbors and RandomForestClassifier)
 - **Version Control:** GitHub
 
 ## Installation and Setup
@@ -44,17 +47,22 @@ le systéme aussi offre une fonctionnalité extensible pour les visiteurs et les
    ```bash
    cd Project-advisor
    ```
-## Made By : 
-` Asmae Moubarriz ` and ` Achraf Akrache `
-## Indice des données
-**TOP500**
-![alt text](TOP500IMG.png)
 
-**PROFILE**
-![alt text](PROFILEIMG.png)
+## Developed By:
+- **Asmae Moubarriz**
+- **Achraf Akrache**
 
-**PROFIT**
-![alt text](PROFITIMG.png)
+## Data Index
+
+### TOP 500
+![TOP 500 Data Visualization](TOP500IMG.png)
+
+### Profile Analysis
+![Profile Data Visualization](PROFILEIMG.png)
+
+### Profit Estimation
+![Profit Data Visualization](PROFITIMG.png)
 
 ## Acknowledgements
-We would like to thank our advisor and professor ` Salma Chrit ` for their continuous support and guidance throughout this project.
+
+We would like to thank our advisor and professor **Salma Chrit** for their continuous support and guidance throughout this project.
