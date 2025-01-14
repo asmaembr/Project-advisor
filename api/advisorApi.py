@@ -14,7 +14,7 @@ def ProfileModel(new_request_data):
   columns_to_encode = ['Education', 'Projet_Individuel', 'Genre', 'EnVille', 
                      'Influence', 'TroubleMental', 'TraitsCles']
   for column in columns_to_encode:
-    encoder = load(f"../model/profile/{column}.pkl")
+    encoder = load(f"model/profile/{column}.pkl")
     new_request_data[column] = encoder.transform(new_request_data[column])
   prediction = model_profile.predict(new_request_data)
   return prediction
@@ -24,14 +24,14 @@ def Top500Model(new_request_data):
   columns_to_encode = ['Ville', 'Categorie']
 
   for column in columns_to_encode:
-    encoder = load(f"../model/top500/{column}.pkl")
+    encoder = load(f"model/top500/{column}.pkl")
     new_request_data[column] = encoder.transform(new_request_data[column])
   prediction = model_top500.predict(new_request_data)
   return prediction
 
 
 def ProfitModel(new_request_data):
-  encoder = load(f"../model/profit/Region.pkl")
+  encoder = load(f"model/profit/Region.pkl")
   new_request_data['Region'] = encoder.transform(new_request_data['Region'])
   prediction = model_profit.predict(new_request_data)
   return prediction
@@ -39,13 +39,13 @@ def ProfitModel(new_request_data):
 
 @app.route('/profile', methods=['GET'])
 def get_profile():
-  colonnes = load('../model/profile/profile_colonnes.pkl')
-  valeurs_trait= load('../model/profile/traits_valeurs.pkl')
-  valeurs_education = load('../model/profile/education_valeurs.pkl')
+  colonnes = load('model/profile/profile_colonnes.pkl')
+  valeurs_trait= load('model/profile/traits_valeurs.pkl')
+  valeurs_education = load('model/profile/education_valeurs.pkl')
   return jsonify({
-    "colonnes": colonnes,
-    "valeurs_trait": valeurs_trait,
-    "valeurs_education": valeurs_education
+    "colonnes": list(colonnes),
+    "valeurs_trait": list(valeurs_trait),
+    "valeurs_education": list(valeurs_education)
   })
 
 @app.route('/profile', methods=['POST'])
@@ -79,13 +79,13 @@ def predict_profile():
 
 @app.route('/top500', methods=['GET'])
 def get_top500():
-  colonnes = load('../model/top500/top500_colonnes.pkl')
-  valeurs_ville = load('../model/top500/ville_valeurs.pkl') 
-  valeurs_categorie = load('../model/top500/categorie_valeurs.pkl')
+  colonnes = load('model/top500/top500_colonnes.pkl')
+  valeurs_ville = load('model/top500/ville_valeurs.pkl') 
+  valeurs_categorie = load('model/top500/categorie_valeurs.pkl')
   return jsonify({
-    "colonnes": colonnes,
-    "valeurs_ville": valeurs_ville,
-    "valeurs_categorie": valeurs_categorie
+    "colonnes": list(colonnes),
+    "valeurs_ville": list(valeurs_ville),
+    "valeurs_categorie": list(valeurs_categorie)
   })
 
 
@@ -104,18 +104,18 @@ def predict_top500():
     }])
   prediction = Top500Model(new_request_data)
   if(prediction == 1):
-    prediction = "Votre startup a du potentiel (peut devenir un des top 500)"
+    prediction = "Votre startup peut devenir un des top 500"
   else:
     prediction = "Votre startup nécessite des améliorations pour devenir un des top 500"
   return jsonify(prediction)
 
 @app.route('/profit', methods=['GET'])
 def get_profit():
-  colonnes = load('../model/profit/profit_colonnes.pkl')
-  valeurs_region = load('../model/profit/region_valeurs.pkl')
+  colonnes = load('model/profit/profit_colonnes.pkl')
+  valeurs_region = load('model/profit/region_valeurs.pkl')
   return jsonify({
-    "colonnes": colonnes,
-    "valeurs_region": valeurs_region
+    "colonnes": list(colonnes),
+    "valeurs_region": list(valeurs_region)
   })
 
 @app.route('/profit', methods=['POST'])
