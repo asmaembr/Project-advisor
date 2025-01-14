@@ -18,15 +18,18 @@ public class Entrepreneur {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
+    //Login information
+    private String username;
+    private String password;
+    //account information
     private String firstname;
     private String lastname;
     private String email;
-
+    //profile information
+    private String education;
     private Integer age;
     private Sexe gender;
-
-    private String username;
-    private String password;
+    private String TroubleMental;
+    private String TraitCles;
 
 }

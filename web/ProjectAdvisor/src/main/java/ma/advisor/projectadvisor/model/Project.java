@@ -17,4 +17,21 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    //top 500 study information
+    private String Ville;
+    private  Integer Nombre_relations;
+    private Integer Tours_financement;
+    private Long Capitale_fonds;
+    private String Categorie;
+    private Integer Investisseurs_providentiels;
+    private Integer Nombre_participants;
+    private Boolean isTop500;
+
+    //profititablity study information
+    private String Region;
+    private Double R_D;
+    private Double Marketing;
+    private Double Administration;
+    private String Profit;
+
 }
