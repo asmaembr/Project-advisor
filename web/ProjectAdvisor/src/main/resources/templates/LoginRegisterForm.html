@@ -8,37 +8,40 @@
     <title>ProjectAdvisor | Login Page</title>
 </head>
 <body>
+<div id="errorToast" class="toast-erreur" th:if="${erreur != null}" th:text="${erreur}"></div>
 <div class="container" id="container">
     <div class="form-container register">
         <form th:action="@{/register}" method="post">
             <h1>Entrepreneur</h1>
-            <input type="text" placeholder="FirstName" name="firstname" th:field="*{entrepreneur.firstname}">
-            <input type="text" placeholder="LastName" name="lastname" th:field="*{entrepreneur.lastname}">
-            <input type="number" placeholder="Age" name="age" th:field="*{entrepreneur.age}">
-            <div th:each="gender : ${T(ma.advisor.projectadvisor.model.Sexe).values()}">
-                <label>
-                    <input type="radio" th:field="*{entrepreneur.gender}" th:value="${gender.name()}"/>
-                    <span th:text="${gender}"></span>
-                </label>
+            <input type="text" placeholder="FirstName" name="firstname" th:field="*{entrepreneur.firstname}" required>
+            <input type="text" placeholder="LastName" name="lastname" th:field="*{entrepreneur.lastname}" required>
+            <input type="number" placeholder="Age" name="age" th:field="*{entrepreneur.age}" required>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <div th:each="gender : ${T(ma.advisor.projectadvisor.model.Sexe).values()}">
+                    <label style="display: flex; align-items: center; gap: 5px;">
+                        <input type="radio" th:field="*{entrepreneur.gender}" th:value="${gender.name()}" required/>
+                        <span th:text="${gender}"></span>
+                    </label>
+                </div>
             </div>
-
-            <input type="email" placeholder="Email" name="email" th:field="*{entrepreneur.email}">
-            <input type="password" placeholder="Password" name="password" th:field="*{entrepreneur.password}">
+            <input type="email" placeholder="Email" name="email" th:field="*{entrepreneur.email}" required>
+            <input type="password" placeholder="Password" name="password" th:field="*{entrepreneur.password}" required>
             <button type="submit">S'inscrire</button>
         </form>
     </div>
     <div class="form-container login">
-        <form>
+        <form th:action="@{/login}" method="post">
             <h1>Se Connecter</h1>
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <button>Se Connecter</button>
-            <p>Clique sur l'icon si vous voulez savoir est-ce que vous êtes un entrepreneur ou non
+            <input type="email" placeholder="Email" name="email">
+            <input type="password" placeholder="Password" name="password">
+            <button type="submit">Se Connecter</button>
+            <div class="floating-card">
+                <h5>Découvrez si vous êtes un entrepreneur en répondant à quelques questions </h5>
                 <a th:href="@{/visitor}">
-                    <img width="64" height="64"
-                        src="https://img.icons8.com/external-tal-revivo-tritone-tal-revivo/64/external-sort-the-document-from-right-side-businessman-portal-full-tritone-tal-revivo.png"
-                        alt="external-sort-the-document-from-right-side-businessman-portal-full-tritone-tal-revivo"/>
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/project-management.png"
+                         alt="project-management"/>
                 </a>
+            </div>
         </form>
     </div>
     <div class="toggle-container">

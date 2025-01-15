@@ -203,3 +203,51 @@ body{
 .container.active .toggle-right{
     transform: translateX(200%);
 }
+
+.toast-erreur {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    display: none;
+}
+
+.toast-erreur.show {
+    display: block;
+    opacity: 1;
+}
+
+.floating-card {
+    position: relative;
+    margin: 20px;
+    padding: 10px;
+    background-color: #91e5e3;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.floating-card a img {
+    transition: transform 0.3s ease;
+}
+
+.floating-card a img:hover {
+    transform: scale(1.1);
+}
+

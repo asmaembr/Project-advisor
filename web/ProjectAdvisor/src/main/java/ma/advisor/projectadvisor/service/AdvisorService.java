@@ -19,6 +19,9 @@ public class AdvisorService {
         entrepreneurRepository.save(entrepreneur);
     }
 
+    public Entrepreneur getEntrepreneur(String email){
+        return entrepreneurRepository.getEntrepreneurByEmail(email);
+    }
 
     public void ProfilePrediction(Entrepreneur entrepreneur) {
 

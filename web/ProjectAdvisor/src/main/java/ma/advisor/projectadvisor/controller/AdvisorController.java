@@ -1,5 +1,6 @@
 package ma.advisor.projectadvisor.controller;
 
+import jakarta.servlet.http.HttpSession;
 import ma.advisor.projectadvisor.model.Entrepreneur;
 import ma.advisor.projectadvisor.repository.EntrepreneurRepository;
 import ma.advisor.projectadvisor.repository.ProjectRepository;
@@ -15,6 +16,7 @@ public class AdvisorController {
     @Autowired
     private AdvisorService advisorService;
 
+
     @GetMapping("/")
     public String login(Model model) {
         model.addAttribute("entrepreneur", new Entrepreneur());
@@ -22,14 +24,27 @@ public class AdvisorController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        return "Dashboard";
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model , HttpSession session) {
+        Entrepreneur user = advisorService.getEntrepreneur(email);
+        if(user!= null && user.getPassword().equals(password)){
+            model.addAttribute("erreur",null);
+            session.setAttribute("user",user);
+            return "Dashboard";
+        }else {
+            model.addAttribute("erreur","Email ou Mot de passe erroné");
+            return "LoginRegisterForm";
+        }
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute Entrepreneur entrepreneur) {
-        advisorService.saveEntrepreneur(entrepreneur);
-        return "redirect:/";
+    public String register(@ModelAttribute Entrepreneur entrepreneur, Model model) {
+        if(advisorService.getEntrepreneur(entrepreneur.getEmail()) != null)
+            model.addAttribute("erreur", "Email déja éxistant , Veillez réessayer !!");
+        else {
+            advisorService.saveEntrepreneur(entrepreneur);
+            model.addAttribute("erreur",null);
+        }
+        return "LoginRegisterForm";
     }
 
     @GetMapping("/visitor")

@@ -9,3 +9,15 @@ registerBtn.addEventListener('click', () => {
 loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const toast = document.getElementById('errorToast');
+    if (toast) {
+        toast.classList.add('show'); // Show the toast
+
+        // Hide the toast after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+});
