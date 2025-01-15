@@ -29,9 +29,21 @@ public class AdvisorController {
         if(user!= null && user.getPassword().equals(password)){
             model.addAttribute("erreur",null);
             session.setAttribute("user",user);
-            return "Dashboard";
+            return "redirect:/dashboard";
         }else {
             model.addAttribute("erreur","Email ou Mot de passe erroné");
+            return "LoginRegisterForm";
+        }
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(HttpSession session, Model model) {
+        if(session.getAttribute("user") != null){
+            model.addAttribute("erreur",null);
+            model.addAttribute("user",(Entrepreneur) session.getAttribute("user"));
+            return "Dashboard";
+        }else {
+            model.addAttribute("erreur","Vous n'avez pas de compte , veillez s'inscrire !!! ");
             return "LoginRegisterForm";
         }
     }
