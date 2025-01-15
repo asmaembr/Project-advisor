@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" th:href="@{/icon/favicon.png}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>ProjectAdvisor | Login Page</title>
+</head>
+<body>
+<div class="container" id="container">
+    <div class="form-container register">
+        <form th:action="@{/register}" method="post">
+            <h1>Entrepreneur</h1>
+            <input type="text" placeholder="FirstName" name="firstname" th:field="*{entrepreneur.firstname}">
+            <input type="text" placeholder="LastName" name="lastname" th:field="*{entrepreneur.lastname}">
+            <input type="number" placeholder="Age" name="age" th:field="*{entrepreneur.age}">
+            <div th:each="gender : ${T(ma.advisor.projectadvisor.model.Sexe).values()}">
+                <label>
+                    <input type="radio" th:field="*{entrepreneur.gender}" th:value="${gender.name()}"/>
+                    <span th:text="${gender}"></span>
+                </label>
+            </div>
+
+            <input type="email" placeholder="Email" name="email" th:field="*{entrepreneur.email}">
+            <input type="password" placeholder="Password" name="password" th:field="*{entrepreneur.password}">
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+    <div class="form-container login">
+        <form>
+            <h1>Se Connecter</h1>
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <button>Se Connecter</button>
+            <p>Clique sur l'icon si vous voulez savoir est-ce que vous êtes un entrepreneur ou non
+                <a th:href="@{/visitor}">
+                    <img width="64" height="64"
+                        src="https://img.icons8.com/external-tal-revivo-tritone-tal-revivo/64/external-sort-the-document-from-right-side-businessman-portal-full-tritone-tal-revivo.png"
+                        alt="external-sort-the-document-from-right-side-businessman-portal-full-tritone-tal-revivo"/>
+                </a>
+        </form>
+    </div>
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-left">
+                <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/flipboard.png"
+                     alt="flipboard"/>
+                <h1>Bienvenue à nouveau !</h1>
+                <p>Entrez vos informations personnelles pour utiliser toutes les fonctionnalités du site</p>
+                <button class="hidden" id="login">Se Connecter</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/group-of-projects.png"
+                     alt="group-of-projects"/>
+                <h1>Bonjour, Entrepreneur !</h1>
+                <p>Inscrivez-vous avec vos informations personnelles pour utiliser toutes les fonctionnalités du
+                    site</p>
+                <button class="hidden" id="register">S'inscrire</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>

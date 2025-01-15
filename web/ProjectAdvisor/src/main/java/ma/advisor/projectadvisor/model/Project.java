@@ -1,10 +1,8 @@
 package ma.advisor.projectadvisor.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +17,7 @@ public class Project {
 
     //top 500 study information
     private String Ville;
-    private  Integer Nombre_relations;
+    private Integer Nombre_relations;
     private Integer Tours_financement;
     private Long Capitale_fonds;
     private String Categorie;
@@ -33,5 +31,9 @@ public class Project {
     private Double Marketing;
     private Double Administration;
     private String Profit;
+
+    //mapping with entrepreneur
+    @ManyToOne
+    private Entrepreneur entrepreneur;
 
 }
