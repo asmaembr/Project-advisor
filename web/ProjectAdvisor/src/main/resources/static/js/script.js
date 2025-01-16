@@ -21,3 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3000);
     }
 });
+
+function updateValueSlider(slider) {
+    slider.nextElementSibling.innerText = slider.value;
+}

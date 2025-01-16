@@ -10,7 +10,7 @@
 <body>
 <div id="errorToast" class="toast-erreur" th:if="${erreur != null}" th:text="${erreur}"></div>
 <div class="container" id="container">
-    <div class="form-container register">
+    <div class="form-container container-left">
         <form th:action="@{/register}" method="post">
             <h1>Entrepreneur</h1>
             <input type="text" placeholder="FirstName" name="firstname" th:field="*{entrepreneur.firstname}" required>
@@ -29,11 +29,11 @@
             <button type="submit">S'inscrire</button>
         </form>
     </div>
-    <div class="form-container login">
+    <div class="form-container container-right">
         <form th:action="@{/login}" method="post">
             <h1>Se Connecter</h1>
-            <input type="email" placeholder="Email" name="email">
-            <input type="password" placeholder="Password" name="password">
+            <input type="email" placeholder="Email" name="email" th:field="${entrepreneur.email}" required>
+            <input type="password" placeholder="Password" name="password" th:field="${entrepreneur.password}" required>
             <button type="submit">Se Connecter</button>
             <div class="floating-card">
                 <h5>Découvrez si vous êtes un entrepreneur en répondant à quelques questions </h5>
@@ -64,6 +64,7 @@
         </div>
     </div>
 </div>
+
 <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

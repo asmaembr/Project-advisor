@@ -53,7 +53,7 @@ def predict_profile():
   request_data = request.get_json()
   new_request_data = pd.DataFrame([{
     "Education": request_data['Education'],
-    "Projet_Individuel": request_data['Projet_Individuel'], 
+    "Projet_Individuel": request_data['ProjetIndividuel'], 
     "Age": request_data['Age'], 
     "Genre": request_data['Genre'],
     "EnVille": request_data['EnVille'], 

@@ -23,7 +23,6 @@ public class Entrepreneur {
     private Integer age;
     @Enumerated(EnumType.STRING)
     private Sexe gender;
-    private String troubleMental;
     private String traitCles;
 
     public UUID getId() {
@@ -88,14 +87,6 @@ public class Entrepreneur {
 
     public void setGender(Sexe gender) {
         this.gender = gender;
-    }
-
-    public String getTroubleMental() {
-        return troubleMental;
-    }
-
-    public void setTroubleMental(String troubleMental) {
-        this.troubleMental = troubleMental;
     }
 
     public String getTraitCles() {
