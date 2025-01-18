@@ -32,4 +32,12 @@ public class AdvisorService {
     public void saveProject(Project project) {
         projectRepository.save(project);
     }
+
+    public void deleteProject(Integer id) {
+        projectRepository.deleteProjectById(id);
+    }
+
+    public Project getProject(int id) {
+        return projectRepository.findById(id).get();
+    }
 }

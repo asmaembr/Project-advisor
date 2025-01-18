@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function updateValueSlider(slider) {
-    slider.nextElementSibling.innerText = slider.value;
+function toggleDetails(button) {
+    const details = button.nextElementSibling;
+    details.style.display = details.style.display === "none" ? "block" : "none";
 }

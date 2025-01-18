@@ -8,7 +8,88 @@
     <title>ProjectAdvisor | Project Management Page</title>
 </head>
 <body>
+<div class="dashboard">
+    <!-- Left Section: Project List and Details -->
+    <div class="left-section">
+        <div class="project-list">
+            <h2>Projects</h2>
+            <ul>
+                <li th:each="project : ${projects}" class="project-item">
+                    <span th:text="${project.ville}"></span>
+                    <button class="toggle-details" onclick="toggleDetails(this)">Details</button>
+                    <div class="project-details" style="display: none;">
+                        <div class="big-card">
+                            <h3>Project Information</h3>
+                            <p><strong>Ville :</strong> <span th:text="${project.ville}"></span></p>
+                            <p><strong>Nombre de Relations :</strong> <span th:text="${project.nombre_relations}"></span></p>
+                            <p><strong>Tours de Financement :</strong> <span th:text="${project.tours_financement}"></span></p>
+                            <p><strong>Capitale Fonds:</strong> <span th:text="${project.capitale_fonds}"></span></p>
+                            <p><strong>Catégorie :</strong> <span th:text="${project.categorie}"></span></p>
+                            <p><strong>Investisseurs Providentiels :</strong> <span th:text="${project.investisseurs_providentiels}"></span></p>
+                            <p><strong>Nombre de Participants:</strong> <span th:text="${project.nombre_participants}"></span></p>
+                            <p><strong>Region:</strong> <span th:text="${project.region}"></span></p>
+                            <p><strong>R&D:</strong> <span th:text="${project.rnd}"></span></p>
+                            <p><strong>Marketing:</strong> <span th:text="${project.marketing}"></span></p>
+                            <p><strong>Administration:</strong> <span th:text="${project.administration}"></span></p>
+                        </div>
+                        <div class="small-cards">
+                            <div class="small-card">
+                                <h3>Profit</h3>
+                                <p th:text="${project.profit}"></p>
+                            </div>
+                            <div class="small-card">
+                                <h3>Top 500</h3>
+                                <p th:text="${project.isTop500}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 
+    <!-- Right Section: Add Project Form -->
+    <div class="right-section">
+        <h2>Add Project</h2>
+        <form th:action="@{/project}" method="post" class="form-global" >
+            <label for="ville">Ville</label>
+            <input type="text" id="ville" name="ville" required>
+
+            <label for="nombre_relations">Nombre de Relations :</label>
+            <input type="number" id="nombre_relations" name="nombre_relations" required>
+
+            <label for="tours_financement">Tours de Financement :</label>
+            <input type="number" id="tours_financement" name="tours_financement" required>
+
+            <label for="capitale_fonds">Capitale Fonds :</label>
+            <input type="number" id="capitale_fonds" name="capitale_fonds" required>
+
+            <label for="categorie">Catégorie :</label>
+            <input type="text" id="categorie" name="categorie" required>
+
+            <label for="investisseurs_providentiels">Investisseurs Providentiels :</label>
+            <input type="number" id="investisseurs_providentiels" name="investisseurs_providentiels" required>
+
+            <label for="nombre_participants">Nombre de Participants :</label>
+            <input type="number" id="nombre_participants" name="nombre_participants" required>
+
+            <label for="region">Region</label>
+            <input type="text" id="region" name="region" required>
+
+            <label for="rnd">R&D</label>
+            <input type="number" id="rnd" name="rnd" required>
+
+            <label for="marketing">Marketing</label>
+            <input type="number" id="marketing" name="marketing" required>
+
+            <label for="administration">Administration</label>
+            <input type="number" id="administration" name="administration" required>
+
+            <button type="submit">Add Project</button>
+        </form>
+    </div>
+
+</div>
 <script th:src="@{/js/script.js}"></script>
 </body>
 </html>
