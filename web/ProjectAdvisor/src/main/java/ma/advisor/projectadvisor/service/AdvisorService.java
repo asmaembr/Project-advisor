@@ -1,11 +1,13 @@
 package ma.advisor.projectadvisor.service;
 
 import ma.advisor.projectadvisor.model.Entrepreneur;
-import ma.advisor.projectadvisor.DTOs.Profile;
+import ma.advisor.projectadvisor.model.Project;
 import ma.advisor.projectadvisor.repository.EntrepreneurRepository;
 import ma.advisor.projectadvisor.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AdvisorService {
@@ -21,9 +23,13 @@ public class AdvisorService {
     public Entrepreneur getEntrepreneur(String email) {
         return entrepreneurRepository.getEntrepreneurByEmail(email);
     }
-    public void ProfilePrediction(Profile entrepreneur) {
 
+    public List<Project> getProjects(Entrepreneur entrepreneur) {
+        return projectRepository.getProjectsByEntrepreneur(entrepreneur);
     }
 
 
+    public void saveProject(Project project) {
+        projectRepository.save(project);
+    }
 }

@@ -1,29 +1,26 @@
 package ma.advisor.projectadvisor.DTOs;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Profile {
-    public String Education;
-    public String ProjetIndividuel;
-    public Integer Age;
-    public String Genre;
-    public String EnVille;
-    public String Influence;
-    public int DegPerseverance;
-    public int DegInitiative;
-    public int DegCompetition;
-    public int DegAutonomie;
-    public int DegBesoinReussite;
-    public int DegConfiance;
-    public int DegSante;
-    public String TroubleMental;
-    public String TraitsCles;
-
+    private String education;
+    private String projetIndividuel;
+    private Integer age;
+    private String genre;
+    private String enVille;
+    private String influence;
+    private Integer degPerseverance;
+    private Integer degInitiative;
+    private Integer degCompetition;
+    private Integer degAutonomie;
+    private Integer degBesoinReussite;
+    private Integer degConfiance;
+    private Integer degSante;
+    private String troubleMental;
+    private String traitsCles;
 }

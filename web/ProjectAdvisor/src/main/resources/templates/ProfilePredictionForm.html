@@ -8,7 +8,6 @@
     <title>ProjectAdvisor | Prediction Profile Page</title>
 </head>
 <body>
-<div id="errorToast" class="toast-erreur" th:if="${erreur != null}" th:text="${erreur}"></div>
 <div class="container" id="container">
     <form th:action="@{/profile}" method="post">
         <div class="form-container container-left">
@@ -19,7 +18,7 @@
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div th:each="rep : ${range}">
                                 <label style="display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" th:field="*{profile.DegPerseverance}" th:value="${rep}"
+                                    <input type="radio" th:field="*{profile.degPerseverance}" th:value="${rep}"
                                            required/>
                                     <span th:text="${rep}"></span>
                                 </label>
@@ -31,7 +30,7 @@
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div th:each="rep : ${range}">
                                 <label style="display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" th:field="*{profile.DegInitiative}" th:value="${rep}"
+                                    <input type="radio" th:field="*{profile.degInitiative}" th:value="${rep}"
                                            required/>
                                     <span th:text="${rep}"></span>
                                 </label>
@@ -43,7 +42,7 @@
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div th:each="rep : ${range}">
                                 <label style="display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" th:field="*{profile.DegCompetition}" th:value="${rep}"
+                                    <input type="radio" th:field="*{profile.degCompetition}" th:value="${rep}"
                                            required/>
                                     <span th:text="${rep}"></span>
                                 </label>
@@ -55,7 +54,7 @@
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div th:each="rep : ${range}">
                                 <label style="display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" th:field="*{profile.DegAutonomie}" th:value="${rep}"
+                                    <input type="radio" th:field="*{profile.degAutonomie}" th:value="${rep}"
                                            required/>
                                     <span th:text="${rep}"></span>
                                 </label>
@@ -67,7 +66,7 @@
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div th:each="rep : ${range}">
                                 <label style="display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" th:field="*{profile.DegBesoinReussite}" th:value="${rep}"
+                                    <input type="radio" th:field="*{profile.degBesoinReussite}" th:value="${rep}"
                                            required/>
                                     <span th:text="${rep}"></span>
                                 </label>
@@ -79,7 +78,7 @@
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div th:each="rep : ${range}">
                                 <label style="display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" th:field="*{profile.DegConfiance}" th:value="${rep}"
+                                    <input type="radio" th:field="*{profile.degConfiance}" th:value="${rep}"
                                            required/>
                                     <span th:text="${rep}"></span>
                                 </label>
@@ -91,7 +90,7 @@
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div th:each="rep : ${range}">
                                 <label style="display: flex; align-items: center; gap: 5px;">
-                                    <input type="radio" th:field="*{profile.DegSante}" th:value="${rep}" required/>
+                                    <input type="radio" th:field="*{profile.degSante}" th:value="${rep}" required/>
                                     <span th:text="${rep}"></span>
                                 </label>
                             </div>
@@ -103,30 +102,30 @@
         </div>
         <div class="form-container container-right">
             <div class="form-global">
-                <input type="number" th:field="*{profile.Age}" placeholder="Age" name="Age">
+                <input type="number" th:field="*{profile.age}" placeholder="Age" name="Age">
                 <span class="span-label">Choisissez Votre Education</span>
-                <select name="Education" class="select-styled" th:field="*{profile.Education}" required>
+                <select name="Education" class="select-styled" th:field="*{profile.education}" required>
                     <option th:each="education : ${Profile_Valeurs.valeurs_education()}" th:value="${education}"
                             th:text="${education}"></option>
                 </select>
                 <span class="span-label">Choisissez Votre Trait de Personnalité</span>
-                <select class="select-styled" name="TraitsCles" th:field="*{profile.TraitsCles}" required>
+                <select class="select-styled" name="TraitsCles" th:field="*{profile.traitsCles}" required>
                     <option th:each="trait : ${Profile_Valeurs.valeurs_trait()}" th:value="${trait}"
                             th:text="${trait}"></option>
                 </select>
                 <div style="display: flex; gap: 10px; align-items: center;">
                     <div th:each="gender : ${T(ma.advisor.projectadvisor.model.Sexe).values}">
                         <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" th:field="*{profile.Genre}" th:value="${gender.name}" required/>
+                            <input type="radio" th:field="*{profile.genre}" th:value="${gender.name}" required/>
                             <span th:text="${gender}"></span>
                         </label>
                     </div>
                 </div>
+                <span class="span-label">Est-ce que c'est un Projet Individuel ?</span>
                 <div style="display: flex; gap: 10px; align-items: center;">
-                    <div th:each="rep : ${T(ma.advisor.projectadvisor.model.Reponse).values}">
-                        <span class="span-label">Est-ce que c'est un Projet Individuel ?</span>
+                    <div th:each="rep : ${T(ma.advisor.projectadvisor.DTOs.Reponse).values}">
                         <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" th:field="*{profile.ProjetIndividuel}" th:value="${rep.name}"
+                            <input type="radio" th:field="*{profile.projetIndividuel}" th:value="${rep.name}"
                                    required/>
                             <span th:text="${rep}"></span>
                         </label>
@@ -134,9 +133,9 @@
                 </div>
                 <span class="span-label">Est-ce que votre Projet est dans la même Ville où vous habitez ?</span>
                 <div style="display: flex; gap: 10px; align-items: center;">
-                    <div th:each="rep : ${T(ma.advisor.projectadvisor.model.Reponse).values}">
+                    <div th:each="rep : ${T(ma.advisor.projectadvisor.DTOs.Reponse).values}">
                         <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" th:field="*{profile.EnVille}" th:value="${rep.name}"
+                            <input type="radio" th:field="*{profile.enVille}" th:value="${rep.name}"
                                    required/>
                             <span th:text="${rep}"></span>
                         </label>
@@ -144,9 +143,9 @@
                 </div>
                 <span class="span-label">Est-ce que quelqu'un vous a influencé pour créer votre projet ?</span>
                 <div style="display: flex; gap: 10px; align-items: center;">
-                    <div th:each="rep : ${T(ma.advisor.projectadvisor.model.Reponse).values}">
+                    <div th:each="rep : ${T(ma.advisor.projectadvisor.DTOs.Reponse).values}">
                         <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" th:field="*{profile.Influence}" th:value="${rep.name}"
+                            <input type="radio" th:field="*{profile.influence}" th:value="${rep.name}"
                                    required/>
                             <span th:text="${rep}"></span>
                         </label>
@@ -154,9 +153,9 @@
                 </div>
                 <span class="span-label">Est-ce que vous avez un trouble mental ?</span>
                 <div style="display: flex; gap: 10px; align-items: center;">
-                    <div th:each="rep : ${T(ma.advisor.projectadvisor.model.Reponse).values}">
+                    <div th:each="rep : ${T(ma.advisor.projectadvisor.DTOs.Reponse).values}">
                         <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" th:field="*{profile.TroubleMental}" th:value="${rep.name}"
+                            <input type="radio" th:field="*{profile.troubleMental}" th:value="${rep.name}"
                                    required/>
                             <span th:text="${rep}"></span>
                         </label>
@@ -167,30 +166,31 @@
         </div>
         <div class="toggle-container">
             <div class="toggle">
+                <div id="errorToast" class="toast" th:if="${toast != null}"> Résultat prêt </div>
                 <div class="toggle-panel toggle-left">
-                    <img th:if="${erreur==null}" width="48" height="48"
+                    <img th:if="${toast==null}" width="48" height="48"
                          src="https://img.icons8.com/color/48/project-management.png"
                          alt="project-management"/>
-                    <h1 th:if="${erreur==null}">Vous y êtes Presque !</h1>
-                    <p th:if="${erreur==null}">Entrez les informations manquantes</p>
+                    <h1 th:if="${toast==null}">Vous y êtes Presque !</h1>
+                    <p th:if="${toast==null}">Entrez les informations manquantes</p>
 
-                    <img th:if="${erreur!=null}" width="100" height="100"
+                    <img th:if="${toast!=null}" width="100" height="100"
                          src="https://img.icons8.com/clouds/100/confetti.png" alt="confetti"/>
-                    <h1 th:if="${erreur!=null}" th:text="${erreur}"></h1>
-                    <p th:if="${erreur!=null}"> Notre Model a pour précision un pourcentage de 59% </p>
+                    <h1 th:if="${toast!=null}" th:text="${toast}"></h1>
+                    <p th:if="${toast!=null}"> Notre model a pour précision un pourcentage de 59% </p>
                     <button class="hidden" id="login" type="button">Retour</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <img th:if="${erreur==null}" width="48" height="48"
+                    <img th:if="${toast==null}" width="48" height="48"
                          src="https://img.icons8.com/color/48/project-management.png"
                          alt="project-management"/>
-                    <h1 th:if="${erreur==null}">Bonjour, Entrepreneur !</h1>
-                    <p th:if="${erreur==null}">Tester Votre Potentiel autant qu'Entrepreneur</p>
+                    <h1 th:if="${toast==null}">Bonjour, Entrepreneur !</h1>
+                    <p th:if="${toast==null}">Tester Votre Potentiel autant qu'Entrepreneur</p>
 
-                    <img th:if="${erreur!=null}" width="100" height="100"
+                    <img th:if="${toast!=null}" width="100" height="100"
                          src="https://img.icons8.com/clouds/100/confetti.png" alt="confetti"/>
-                    <h1 th:if="${erreur!=null}" th:text="${erreur}"></h1>
-                    <p th:if="${erreur!=null}"> Notre Model a pour précision un pourcentage de 59% </p>
+                    <h1 th:if="${toast!=null}" th:text="${toast}"></h1>
+                    <p th:if="${toast!=null}"> Notre model a pour précision un pourcentage de 59% </p>
                     <button class="hidden" id="register" type="button">Suivant</button>
                     <a th:href="@{/}">
                         <button class="hidden" type="button">Revenir à la page de connexion

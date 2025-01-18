@@ -8,7 +8,6 @@
     <title>ProjectAdvisor | Login Page</title>
 </head>
 <body>
-<div id="errorToast" class="toast-erreur" th:if="${erreur != null}" th:text="${erreur}"></div>
 <div class="container" id="container">
     <div class="form-container container-left">
         <form th:action="@{/register}" method="post">
@@ -46,6 +45,7 @@
     </div>
     <div class="toggle-container">
         <div class="toggle">
+            <div id="errorToast" class="toast-erreur" th:if="${erreur != null}" th:text="${erreur}"></div>
             <div class="toggle-panel toggle-left">
                 <img width="48" height="48" src="https://img.icons8.com/pulsar-gradient/48/flipboard.png"
                      alt="flipboard"/>

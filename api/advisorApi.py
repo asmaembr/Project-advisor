@@ -50,21 +50,21 @@ def get_profile():
 def predict_profile():
   request_data = request.get_json()
   new_request_data = pd.DataFrame([{
-    "Education": request_data['Education'],
-    "Projet_Individuel": request_data['ProjetIndividuel'], 
-    "Age": request_data['Age'], 
-    "Genre": request_data['Genre'],
-    "EnVille": request_data['EnVille'], 
-    "Influence": request_data['Influence'], 
-    "DegPerseverance": request_data['DegPerseverance'], 
-    "DegInitiative": request_data['DegInitiative'],
-    "DegCompetition": request_data['DegCompetition'], 
-    "DegAutonomie": request_data['DegAutonomie'], 
-    "DegBesoinReussite": request_data['DegBesoinReussite'],
-    "DegConfiance": request_data['DegConfiance'], 
-    "DegSante": request_data['DegSante'], 
-    "TroubleMental": request_data['TroubleMental'], 
-    "TraitsCles": request_data['TraitsCles']
+    "Education": request_data['education'],
+    "Projet_Individuel": request_data['projetIndividuel'], 
+    "Age": request_data['age'], 
+    "Genre": request_data['genre'],
+    "EnVille": request_data['enVille'], 
+    "Influence": request_data['influence'], 
+    "DegPerseverance": request_data['degPerseverance'], 
+    "DegInitiative": request_data['degInitiative'],
+    "DegCompetition": request_data['degCompetition'], 
+    "DegAutonomie": request_data['degAutonomie'], 
+    "DegBesoinReussite": request_data['degBesoinReussite'],
+    "DegConfiance": request_data['degConfiance'], 
+    "DegSante": request_data['degSante'], 
+    "TroubleMental": request_data['troubleMental'], 
+    "TraitsCles": request_data['traitsCles']
 }])
 
   
@@ -91,13 +91,13 @@ def get_top500():
 def predict_top500():
   request_data = request.get_json()
   new_request_data = pd.DataFrame([{
-    'Ville': request_data['Ville'],
-        'Nombre_relations': request_data['Nombre_relations'],
-        'Tours_financement': request_data['Tours_financement'],
-        'Capitale_fonds': request_data['Capitale_fonds'],
-        'Categorie': request_data['Categorie'],
-        'Investisseurs_providentiels': request_data['Investisseurs_providentiels'],
-        'Nombre_participants': request_data['Nombre_participants'],
+    'Ville': request_data['ville'],
+        'Nombre_relations': request_data['nombre_relations'],
+        'Tours_financement': request_data['tours_financement'],
+        'Capitale_fonds': request_data['capitale_fonds'],
+        'Categorie': request_data['categorie'],
+        'Investisseurs_providentiels': request_data['investisseurs_providentiels'],
+        'Nombre_participants': request_data['nombre_participants'],
 
     }])
   prediction = Top500Model(new_request_data)
@@ -120,10 +120,10 @@ def get_profit():
 def predict_profit():
   request_data = request.get_json()
   new_request_data = pd.DataFrame([{
-    'R&D': request_data['R&D'],
-    'Administration': request_data['Administration'],
-    'Marketing': request_data['Marketing'],
-    'Region': request_data['Region'],
+    'R&D': request_data['rnd'],
+    'Administration': request_data['administration'],
+    'Marketing': request_data['marketing'],
+    'Region': request_data['region'],
   }])
   prediction = ProfitModel(new_request_data)
   prediction = str(prediction)

@@ -1,39 +1,35 @@
 package ma.advisor.projectadvisor.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Project {
+public class Project{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     //top 500 study information
-    private String Ville;
-    private Integer Nombre_relations;
-    private Integer Tours_financement;
-    private Long Capitale_fonds;
-    private String Categorie;
-    private Integer Investisseurs_providentiels;
-    private Integer Nombre_participants;
-    private Boolean isTop500;
+    private String ville;
+    private Integer nombre_relations;
+    private Integer tours_financement;
+    private Long capitale_fonds;
+    private String categorie;
+    private Integer investisseurs_providentiels;
+    private Integer nombre_participants;
+    private String isTop500;
 
     //profititablity study information
-    private String Region;
-    private Double R_D;
-    private Double Marketing;
-    private Double Administration;
-    private String Profit;
+    private String region;
+    private Double rnd;
+    private Double marketing;
+    private Double administration;
+    private String profit;
 
     //mapping with entrepreneur
     @ManyToOne
     private Entrepreneur entrepreneur;
-
 }
