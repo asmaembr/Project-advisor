@@ -6,8 +6,12 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-
+html {
+    transform: scale(1.2);
+    transform-origin: center center ;
+}
 body{
+    overflow: hidden;
     background: #a8fffd linear-gradient(to right, #e2e2e2, #bff1f0);
     display: flex;
     align-items: center;
@@ -90,6 +94,7 @@ body{
     border-radius: 8px;
     width: 100%;
     outline: none;
+    text-align: center;
 }
 
 .form-container{
@@ -248,16 +253,6 @@ body{
 .floating-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-
-
-.floating-card a img {
-    transition: transform 0.3s ease;
-}
-
-.floating-card a img:hover {
-    transform: scale(1.1);
 }
 
 .select-styled {

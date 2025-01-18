@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div>
-                        <span class="span-label">Quel est votre degré d'autonomie dans un projet ?</span>
+                        <span class="span-label">Quel est votre degré d'autonomie ?</span>
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div th:each="rep : ${range}">
                                 <label style="display: flex; align-items: center; gap: 5px;">
@@ -122,9 +122,9 @@
                         </label>
                     </div>
                 </div>
-                <span class="span-label">Est-ce que vous avez un Projet Individuel ?</span>
                 <div style="display: flex; gap: 10px; align-items: center;">
                     <div th:each="rep : ${T(ma.advisor.projectadvisor.model.Reponse).values}">
+                        <span class="span-label">Est-ce que c'est un Projet Individuel ?</span>
                         <label style="display: flex; align-items: center; gap: 5px;">
                             <input type="radio" th:field="*{profile.ProjetIndividuel}" th:value="${rep.name}"
                                    required/>
@@ -174,7 +174,8 @@
                     <h1 th:if="${erreur==null}">Vous y êtes Presque !</h1>
                     <p th:if="${erreur==null}">Entrez les informations manquantes</p>
 
-                    <img th:if="${erreur!=null}" th:src="@{/icon/icon.gif}" alt="profilePrediction" width="64" height="64">
+                    <img th:if="${erreur!=null}" width="100" height="100"
+                         src="https://img.icons8.com/clouds/100/confetti.png" alt="confetti"/>
                     <h1 th:if="${erreur!=null}" th:text="${erreur}"></h1>
                     <p th:if="${erreur!=null}"> Notre Model a pour précision un pourcentage de 59% </p>
                     <button class="hidden" id="login" type="button">Retour</button>
@@ -186,10 +187,16 @@
                     <h1 th:if="${erreur==null}">Bonjour, Entrepreneur !</h1>
                     <p th:if="${erreur==null}">Tester Votre Potentiel autant qu'Entrepreneur</p>
 
-                    <img th:if="${erreur!=null}" th:src="@{/icon/icon.gif}" alt="profilePrediction" width="64" height="64">
+                    <img th:if="${erreur!=null}" width="100" height="100"
+                         src="https://img.icons8.com/clouds/100/confetti.png" alt="confetti"/>
                     <h1 th:if="${erreur!=null}" th:text="${erreur}"></h1>
                     <p th:if="${erreur!=null}"> Notre Model a pour précision un pourcentage de 59% </p>
                     <button class="hidden" id="register" type="button">Suivant</button>
+                    <a th:href="@{/}">
+                        <button class="hidden" type="button">Revenir à la page de connexion
+                        </button>
+                    </a>
+
                 </div>
             </div>
         </div>
