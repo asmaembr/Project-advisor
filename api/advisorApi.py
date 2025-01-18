@@ -39,11 +39,9 @@ def ProfitModel(new_request_data):
 
 @app.route('/profile', methods=['GET'])
 def get_profile():
-  colonnes = load('model/profile/profile_colonnes.pkl')
   valeurs_trait= load('model/profile/traits_valeurs.pkl')
   valeurs_education = load('model/profile/education_valeurs.pkl')
   return jsonify({
-    "colonnes": list(colonnes),
     "valeurs_trait": list(valeurs_trait),
     "valeurs_education": list(valeurs_education)
   })

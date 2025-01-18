@@ -1,4 +1,4 @@
-package ma.advisor.projectadvisor.model;
+package ma.advisor.projectadvisor.DTOs;
 
 public enum Reponse {
     Oui,
