@@ -7,88 +7,91 @@
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <title>ProjectAdvisor | Project Management Page</title>
 </head>
+<style>
+    .dashboard {
+        background-color: #ffffff;
+        border-radius: 30px;
+        width: 90%;
+        height: 90%;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .project-list{
+        width: 60%;
+        overflow-y: auto;
+    }
+    .project-form {
+        text-align: center;
+        width: 40%;
+        overflow-y: auto;
+    }
+    .project-card {
+        background-color: #f9f9f9;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .project-card-header {
+        display: flex;
+        justify-content: flex-start;
+        gap: 20px;
+        align-items: center;
+    }
+    .project-card-footer {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+    }
+</style>
 <body>
 <div class="dashboard">
-    <!-- Left Section: Project List and Details -->
-    <div class="left-section">
-        <div class="project-list">
-            <h2>Projects</h2>
-            <ul>
-                <li th:each="project : ${projects}" class="project-item">
-                    <span th:text="${project.ville}"></span>
-                    <button class="toggle-details" onclick="toggleDetails(this)">Details</button>
-                    <div class="project-details" style="display: none;">
-                        <div class="big-card">
-                            <h3>Project Information</h3>
-                            <p><strong>Ville :</strong> <span th:text="${project.ville}"></span></p>
-                            <p><strong>Nombre de Relations :</strong> <span th:text="${project.nombre_relations}"></span></p>
-                            <p><strong>Tours de Financement :</strong> <span th:text="${project.tours_financement}"></span></p>
-                            <p><strong>Capitale Fonds:</strong> <span th:text="${project.capitale_fonds}"></span></p>
-                            <p><strong>Catégorie :</strong> <span th:text="${project.categorie}"></span></p>
-                            <p><strong>Investisseurs Providentiels :</strong> <span th:text="${project.investisseurs_providentiels}"></span></p>
-                            <p><strong>Nombre de Participants:</strong> <span th:text="${project.nombre_participants}"></span></p>
-                            <p><strong>Region:</strong> <span th:text="${project.region}"></span></p>
-                            <p><strong>R&D:</strong> <span th:text="${project.rnd}"></span></p>
-                            <p><strong>Marketing:</strong> <span th:text="${project.marketing}"></span></p>
-                            <p><strong>Administration:</strong> <span th:text="${project.administration}"></span></p>
-                        </div>
-                        <div class="small-cards">
-                            <div class="small-card">
-                                <h3>Profit</h3>
-                                <p th:text="${project.profit}"></p>
-                            </div>
-                            <div class="small-card">
-                                <h3>Top 500</h3>
-                                <p th:text="${project.isTop500}"></p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+    <!-- Left Section: Project List -->
+    <div class="project-list">
+        <h2>Liste des Projets</h2>
+        <div class="project-card" th:each="p : ${projects}">
+            <div class="project-card-header">
+                <h3 th:value="${p.name}">Project Name</h3>
+                <a><i class="fas fa-edit"></i></a>
+                <a><i class="fas fa-trash-alt"></i></a>
+            </div>
+            <button onclick="toggleDetails(this)"><i class="fas fa-chevron-down"></i></button>
+            <div class="project-card-body" style="display: none">
+                <span  class="span-label" th:text="Ville"></span>
+                <span class="span-value" th:text="${p.ville}"></span>
+            </div>
+            <div class="project-card-footer">
+                <div>
+                    <input>
+                    <button>Prédir Profit</button>
+                </div>
+                <div>
+                    <input>
+                    <button>Prédir Top500</button>
+                </div>
+            </div>
         </div>
     </div>
-
     <!-- Right Section: Add Project Form -->
-    <div class="right-section">
-        <h2>Add Project</h2>
+    <div class="project-form">
+        <h2>Nouvelle Etude</h2>
         <form th:action="@{/project}" method="post" class="form-global" >
-            <label for="ville">Ville</label>
-            <input type="text" id="ville" name="ville" required>
-
-            <label for="nombre_relations">Nombre de Relations :</label>
-            <input type="number" id="nombre_relations" name="nombre_relations" required>
-
-            <label for="tours_financement">Tours de Financement :</label>
-            <input type="number" id="tours_financement" name="tours_financement" required>
-
-            <label for="capitale_fonds">Capitale Fonds :</label>
-            <input type="number" id="capitale_fonds" name="capitale_fonds" required>
-
-            <label for="categorie">Catégorie :</label>
-            <input type="text" id="categorie" name="categorie" required>
-
-            <label for="investisseurs_providentiels">Investisseurs Providentiels :</label>
-            <input type="number" id="investisseurs_providentiels" name="investisseurs_providentiels" required>
-
-            <label for="nombre_participants">Nombre de Participants :</label>
-            <input type="number" id="nombre_participants" name="nombre_participants" required>
-
-            <label for="region">Region</label>
-            <input type="text" id="region" name="region" required>
-
-            <label for="rnd">R&D</label>
-            <input type="number" id="rnd" name="rnd" required>
-
-            <label for="marketing">Marketing</label>
-            <input type="number" id="marketing" name="marketing" required>
-
-            <label for="administration">Administration</label>
-            <input type="number" id="administration" name="administration" required>
-
-            <button type="submit">Add Project</button>
+            <input type="text" id="ville" name="ville"  placeholder="Ville" required>
+            <input type="number" id="nombre_relations" name="nombre_relations" placeholder="Nombre de Relations" required>
+            <input type="number" id="tours_financement" name="tours_financement" placeholder="Tours de Financement" required>
+            <input type="number" id="capitale_fonds" name="capitale_fonds" placeholder="Capitale Fonds" required>
+            <input type="text" id="categorie" name="categorie" placeholder="Catégorie" required>
+            <input type="number" id="investisseurs_providentiels" placeholder="Investisseurs Providentiels" name="investisseurs_providentiels" required>
+            <input type="number" id="nombre_participants" name="nombre_participants" placeholder="Nombre de Participants" required>
+            <input type="text" id="region" name="region" placeholder="Region" required>
+            <input type="number" id="rnd" name="rnd" placeholder="R&D" required>
+            <input type="number" id="marketing" name="marketing" placeholder="Marketing" required>
+            <input type="number" id="administration" name="administration" placeholder="Administration" required>
+            <button type="submit"><i class="fas fa-add"></i></button>
         </form>
     </div>
-
 </div>
 <script th:src="@{/js/script.js}"></script>
 </body>

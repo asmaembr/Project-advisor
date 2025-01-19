@@ -11,7 +11,7 @@ public class Project{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
+    private String name;
     //top 500 study information
     private String ville;
     private Integer nombre_relations;

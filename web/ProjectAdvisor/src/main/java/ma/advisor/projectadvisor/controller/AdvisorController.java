@@ -9,14 +9,12 @@ import ma.advisor.projectadvisor.service.AdvisorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
 @Controller
+@RequestMapping("/")
 public class AdvisorController {
 
     @Autowired
@@ -25,7 +23,7 @@ public class AdvisorController {
     private AdvisorProxy advisorProxy;
 
 
-    @GetMapping("/")
+    @GetMapping
     public String login(Model model) {
         model.addAttribute("entrepreneur", new Entrepreneur());
         return "LoginRegisterForm";
@@ -79,69 +77,6 @@ public class AdvisorController {
         model.addAttribute("toast", advisorProxy.ProfilePrediction(profile).trim());
         return "ProfilePredictionForm";
     }
-
-
-    @GetMapping("/dashboard")
-    public String dashboard(HttpSession session, Model model) {
-        if (session.getAttribute("user") != null) {
-            model.addAttribute("erreur", null);
-            model.addAttribute("user", (Entrepreneur) session.getAttribute("user"));
-            model.addAttribute("projects", advisorService.getProjects((Entrepreneur) session.getAttribute("user")));
-            model.addAttribute("project", new Project());
-            return "Dashboard";
-        } else {
-            model.addAttribute("erreur", "Vous n'avez pas de compte , veillez s'inscrire !!! ");
-            return "LoginRegisterForm";
-        }
-    }
-
-    @PostMapping("/new")
-    public String newProject(@ModelAttribute Project project, HttpSession session, Model model) {
-        if (session.getAttribute("user") != null) {
-            project.setEntrepreneur((Entrepreneur) session.getAttribute("user"));
-            advisorService.saveProject(project);
-            return "redirect:/dashboard";
-        } else {
-            model.addAttribute("erreur", "Vous n'avez pas de compte , veillez s'inscrire !!! ");
-            return "LoginRegisterForm";
-        }
-    }
-    @GetMapping("/delete/{id}")
-    public String deleteProject(HttpSession session, Model model , @PathVariable int id) {
-        if (session.getAttribute("user") != null) {
-            advisorService.deleteProject(id);
-            return "redirect:/dashboard";
-        } else {
-            model.addAttribute("erreur", "Vous n'avez pas de compte , veillez s'inscrire !!! ");
-            return "LoginRegisterForm";
-        }
-    }
-    @GetMapping("/modify/{id}")
-    public String modifyProject(HttpSession session, Model model , @PathVariable int id) {
-        if (session.getAttribute("user") != null) {
-            model.addAttribute("projects", advisorService.getProjects((Entrepreneur) session.getAttribute("user")));
-            model.addAttribute("project",advisorService.getProject(id)) ;
-            return "Dashboard";
-        } else {
-            model.addAttribute("erreur", "Vous n'avez pas de compte , veillez s'inscrire !!! ");
-            return "LoginRegisterForm";
-        }
-    }
-
-    @PostMapping("/profit")
-    public String profit(@ModelAttribute Project project, Model model) {
-        model.addAttribute("toast", advisorProxy.ProfitPrediction(project).trim());
-        project.setProfit(advisorProxy.ProfitPrediction(project).trim());
-        return "Dashboard";
-    }
-
-    @PostMapping("/top500")
-    public String top500(@ModelAttribute Project project, Model model) {
-        model.addAttribute("toast", advisorProxy.Top500Prediction(project).trim());
-        project.setIsTop500(advisorProxy.Top500Prediction(project).trim());
-        return "Dashboard";
-    }
-
 
 
 
