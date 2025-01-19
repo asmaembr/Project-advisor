@@ -21,7 +21,7 @@ def ProfileModel(new_request_data):
 
 
 def Top500Model(new_request_data):
-  columns_to_encode = ['Ville', 'Categorie']
+  columns_to_encode = ['Ville', 'Categorie','Investisseurs_providentiels']
 
   for column in columns_to_encode:
     encoder = load(f"model/top500/{column}.pkl")
@@ -77,11 +77,9 @@ def predict_profile():
 
 @app.route('/top500', methods=['GET'])
 def get_top500():
-  colonnes = load('model/top500/top500_colonnes.pkl')
   valeurs_ville = load('model/top500/ville_valeurs.pkl') 
   valeurs_categorie = load('model/top500/categorie_valeurs.pkl')
   return jsonify({
-    "colonnes": list(colonnes),
     "valeurs_ville": list(valeurs_ville),
     "valeurs_categorie": list(valeurs_categorie)
   })
@@ -109,10 +107,8 @@ def predict_top500():
 
 @app.route('/profit', methods=['GET'])
 def get_profit():
-  colonnes = load('model/profit/profit_colonnes.pkl')
   valeurs_region = load('model/profit/region_valeurs.pkl')
   return jsonify({
-    "colonnes": list(colonnes),
     "valeurs_region": list(valeurs_region)
   })
 

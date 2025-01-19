@@ -293,6 +293,7 @@ input {
     overflow-y: auto;
 }
 .project-form {
+    gap: 10px;
     text-align: center;
     width: 40%;
     overflow-y: auto;
@@ -309,6 +310,13 @@ input {
     justify-content: flex-start;
     gap: 20px;
     align-items: center;
+}
+
+.project-card-header a {
+    color: #71a8af;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
 }
 .project-card-footer {
     display: flex;

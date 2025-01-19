@@ -1,15 +1,10 @@
-package ma.advisor.projectadvisor.model;
+package ma.advisor.projectadvisor.DTOs;
 
-import jakarta.persistence.*;
-import lombok.*;
 
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
+import lombok.Data;
+
 @Data
-public class Project{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class ProjectDTO {
     private Integer id;
     private String name;
     //top 500 study information
@@ -29,7 +24,4 @@ public class Project{
     private Double administration;
     private String profit;
 
-    //mapping with entrepreneur
-    @ManyToOne
-    private Entrepreneur entrepreneur;
 }

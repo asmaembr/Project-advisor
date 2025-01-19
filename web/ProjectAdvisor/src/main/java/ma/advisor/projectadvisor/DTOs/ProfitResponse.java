@@ -1,4 +1,6 @@
 package ma.advisor.projectadvisor.DTOs;
 
-public class ProfitResponse {
+import java.util.List;
+
+public record ProfitResponse(List<String> valeurs_region) {
 }

@@ -26,7 +26,8 @@ public class AdvisorController {
 
 
     @GetMapping
-    public String login(Model model) {
+    public String login(Model model , HttpSession session) {
+        session.removeAttribute("user");
         model.addAttribute("entrepreneur", new Entrepreneur());
         return "LoginRegisterForm";
     }

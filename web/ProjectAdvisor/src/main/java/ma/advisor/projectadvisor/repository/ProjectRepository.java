@@ -9,5 +9,5 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
     List<Project> getProjectsByEntrepreneur(Entrepreneur entrepreneur);
 
-    void deleteProjectById(Integer id   );
+    void deleteProjectById(Integer id);
 }
