@@ -275,3 +275,43 @@ input {
     font-weight: 600;
     color: #71a8af;
 }
+
+
+
+.dashboard {
+    background-color: #ffffff;
+    border-radius: 30px;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.project-list{
+    width: 60%;
+    overflow-y: auto;
+}
+.project-form {
+    text-align: center;
+    width: 40%;
+    overflow-y: auto;
+}
+.project-card {
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.project-card-header {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+}
+.project-card-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
