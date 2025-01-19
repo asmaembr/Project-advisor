@@ -3,13 +3,15 @@ package ma.advisor.projectadvisor.controller;
 import jakarta.servlet.http.HttpSession;
 import ma.advisor.projectadvisor.DTOs.Profile;
 import ma.advisor.projectadvisor.model.Entrepreneur;
-import ma.advisor.projectadvisor.model.Project;
 import ma.advisor.projectadvisor.service.AdvisorProxy;
 import ma.advisor.projectadvisor.service.AdvisorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
 
@@ -77,8 +79,6 @@ public class AdvisorController {
         model.addAttribute("toast", advisorProxy.ProfilePrediction(profile).trim());
         return "ProfilePredictionForm";
     }
-
-
 
 
 }
