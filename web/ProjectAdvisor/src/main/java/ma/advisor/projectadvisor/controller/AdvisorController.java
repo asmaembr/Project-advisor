@@ -62,7 +62,7 @@ public class AdvisorController {
         return "LoginRegisterForm";
     }
 
-    @GetMapping("/visitor")
+    @GetMapping("/profile")
     public String visitor(Model model) {
         model.addAttribute("toast", null);
         model.addAttribute("Profile_Valeurs", advisorProxy.getValeursProfile());
