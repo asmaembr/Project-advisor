@@ -32,7 +32,7 @@ public class AdvisorController {
         return "LoginRegisterForm";
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public String login(@ModelAttribute Entrepreneur entrepreneur, Model model, HttpSession session) {
         Entrepreneur user = advisorService.getEntrepreneur(entrepreneur.getEmail());
         if (user != null && user.getPassword().equals(entrepreneur.getPassword())) {
@@ -45,13 +45,13 @@ public class AdvisorController {
         }
     }
 
-    @PostMapping("/logout")
+    @PostMapping("logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
         return "redirect:/";
     }
 
-    @PostMapping("/register")
+    @PostMapping("register")
     public String register(@ModelAttribute Entrepreneur entrepreneur, Model model) {
         if (advisorService.getEntrepreneur(entrepreneur.getEmail()) != null)
             model.addAttribute("erreur", "Email déja éxistant , Veillez réessayer !!");
@@ -62,7 +62,7 @@ public class AdvisorController {
         return "LoginRegisterForm";
     }
 
-    @GetMapping("/profile")
+    @GetMapping("profile")
     public String visitor(Model model) {
         model.addAttribute("toast", null);
         model.addAttribute("Profile_Valeurs", advisorProxy.getValeursProfile());
@@ -72,7 +72,7 @@ public class AdvisorController {
     }
 
 
-    @PostMapping("/profile")
+    @PostMapping("profile")
     public String visitor(@ModelAttribute Profile profile, Model model) {
         model.addAttribute("Profile_Valeurs", advisorProxy.getValeursProfile());
         model.addAttribute("range", Arrays.asList(1, 2, 3, 4, 5));
