@@ -112,19 +112,27 @@ public class DashboardController {
 
 
     @PostMapping("/profit/{id}")
-    public String profit( Model model  ,@PathVariable  Integer id) {
+    public String profit( Model model  ,@PathVariable  Integer id , HttpSession session) {
         Project projet = advisorService.getProject(id);
-        model.addAttribute("toast", advisorProxy.ProfitPrediction(projet).trim());
-        projet.setProfit(advisorProxy.ProfitPrediction(projet).trim());
-        return "redirect:/dashboard";
+        model.addAttribute("toast", advisorProxy.ProfitPrediction(projet));
+        projet.setProfit(advisorProxy.ProfitPrediction(projet));
+        model.addAttribute("ProfitReponse", advisorProxy.getValeursProfit());
+        model.addAttribute("Top500Reponse", advisorProxy.getValeursTop500());
+        model.addAttribute("projects", advisorService.getProjects((Entrepreneur) session.getAttribute("user")));
+        model.addAttribute("project", new ProjectDTO());
+        return "Dashboard";
     }
 
     @PostMapping("/top500/{id}")
-    public String top500( Model model  ,@PathVariable  Integer id) {
+    public String top500( Model model  ,@PathVariable  Integer id,HttpSession session) {
         Project projet = advisorService.getProject(id);
-        model.addAttribute("toast", advisorProxy.Top500Prediction(projet).trim());
-        projet.setIsTop500(advisorProxy.ProfitPrediction(projet).trim());
-        return "redirect:/dashboard";
+        model.addAttribute("toast", advisorProxy.Top500Prediction(projet));
+        projet.setIsTop500(advisorProxy.Top500Prediction(projet));
+        model.addAttribute("ProfitReponse", advisorProxy.getValeursProfit());
+        model.addAttribute("Top500Reponse", advisorProxy.getValeursTop500());
+        model.addAttribute("projects", advisorService.getProjects((Entrepreneur) session.getAttribute("user")));
+        model.addAttribute("project", new ProjectDTO());
+        return "Dashboard";
     }
 
 
