@@ -56,12 +56,18 @@ Additionally, the system provides an extensible feature for visitors and registe
 
 ### TOP 500
 ![TOP 500 Data Visualization](TOP500IMG.png)
+### TOP 500 Accuracy
+![TOP 500 Data Visualization](TOP500IMG2.png)
 
 ### Profile Analysis
 ![Profile Data Visualization](PROFILEIMG.png)
+### Profile Accuracy
+![Profile Data Visualization](PROFILEIMG2.png)
 
 ### Profit Estimation
 ![Profit Data Visualization](PROFITIMG.png)
+### Profit Accuracy
+![Profit Data Visualization](PROFITIMG2.png)
 
 ## Acknowledgements
 
