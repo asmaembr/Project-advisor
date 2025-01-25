@@ -1,172 +1,221 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" th:href="@{/icon/favicon.png}" />
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" th:href="@{/icon/favicon.png}" type="image/x-icon"/>
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+            rel="stylesheet"
     />
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <title>ProjectAdvisor | Project Management Page</title>
-  </head>
-  <body>
-    <div class="dashboard">
-      <div class="project-list">
-        <div id="errorToast" class="toast" th:if="${toast != null}">
-          Résultat prêt
-        </div>
+</head>
+<body>
+<div class="dashboard">
+
+    <div class="project-list">
         <h2>Liste des Projets</h2>
         <div class="project-card" th:each="p : ${projects}">
-          <div class="project-card-header">
-            <h3 th:text="${p.name}">Project Name</h3>
-            <a th:href="@{/dashboard/modify/{id}(id=${p.id})}"
-              ><i class="fas fa-edit"></i
-            ></a>
-            <a th:href="@{/dashboard/delete/{id}(id=${p.id})}"
-              ><i class="fas fa-trash-alt"></i
-            ></a>
-          </div>
-          <button onclick="toggleDetails(this)">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="project-card-body" style="display: none">
-            <span class="span-label"> Ville</span>
-            <span class="span-value" th:text="${p.ville}"></span>
-            <span class="span-label"> Region</span>
-            <span class="span-value" th:text="${p.region}"></span>
-          </div>
-          <div class="project-card-footer">
-            <form
-              th:action="@{/dashboard/profit/{id}(id=${p.id})}"
-              method="post"
-            >
-              <p  th:text="${p.profit}"></p>
-              <button>Prédir Profit</button>
-            </form>
-            <form
-              th:action="@{/dashboard/top500/{id}(id=${p.id})}"
-              method="post"
-            >
-              <p th:text="${p.isTop500}"></p>
-              <button>Prédir Top500</button>
-            </form>
-          </div>
+            <div id="errorToast" class="toast" th:if="${toast != null}" th:text="${toast}"></div>
+            <div class="project-card-header">
+                <h3 th:text="${p.name}"></h3>
+                <a th:href="@{/dashboard/modify/{id}(id=${p.id})}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a th:href="@{/dashboard/delete/{id}(id=${p.id})}">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </div>
+            <button onclick="toggleDetails(this)">
+                details
+            </button>
+            <div class="project-card-body" style="display: none">
+                <table>
+                    <tr>
+                        <td class="span-label">Ville</td>
+                        <td class="span-value" th:text="${p.ville}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Region</td>
+                        <td th:text="${p.region}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Nombre de Participants</td>
+                        <td th:text="${p.nombre_participants}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Nombre de Relations</td>
+                        <td th:text="${p.nombre_relations}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Tours de Financement</td>
+                        <td th:text="${p.tours_financement}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Capitale des Fonds de Financement</td>
+                        <td th:text="${p.capitale_fonds}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Categorie</td>
+                        <td th:text="${p.categorie}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Investisseurs Providentiels</td>
+                        <td th:text="${p.investisseurs_providentiels}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Recherche et Dev</td>
+                        <td th:text="${p.rnd}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Marketing</td>
+                        <td th:text="${p.marketing}"></td>
+                    </tr>
+                    <tr>
+                        <td class="span-label">Administration</td>
+                        <td th:text="${p.administration}"></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="prediction">
+                <div>
+                    <span class="span-label">Profit</span>
+                    <span th:text="${p.profit}"></span>
+                </div>
+                <div>
+                    <span class="span-label">Top500</span>
+                    <span th:text="${p.isTop500}"></span>
+                </div>
+
+            </div>
+            <div class="project-card-footer">
+                <form
+                        method="post"
+                        th:action="@{/dashboard/profit/{id}(id=${p.id})}"
+                >
+                    <button>Prédir Profit</button>
+                </form>
+                <form
+                        method="post"
+                        th:action="@{/dashboard/top500/{id}(id=${p.id})}"
+                >
+                    <button>Prédir Top500</button>
+                </form>
+            </div>
         </div>
-      </div>
-      <div class="project-form">
-        <div class="form-global">
-          <h2>Nouvelle Etude</h2>
-          <form th:action="@{/dashboard/new}" method="post">
-            <input type="number" th:field="*{project.id}" hidden="hidden" />
+    </div>
+    <div class="project-form">
+        <form class="project-form-container" method="post" th:action="@{/dashboard/new}">
+            <h2>Nouvelle Etude</h2>
+            <input hidden="hidden" th:field="*{project.id}" type="number"/>
             <input
-              placeholder="Nom du projet"
-              type="text"
-              th:field="*{project.name}"
-              required
+                    placeholder="Nom du projet"
+                    required
+                    th:field="*{project.name}"
+                    type="text"
             />
             <span class="span-label">Ville</span>
-            <select class="select-styled" th:field="*{project.ville}" required>
-              <option
-                th:each="ville : ${Top500Reponse.valeurs_ville()}"
-                th:value="${ville}"
-                th:text="${ville}"
-              ></option>
+            <select class="select-styled" required th:field="*{project.ville}">
+                <option
+                        th:each="ville : ${Top500Reponse.valeurs_ville()}"
+                        th:text="${ville}"
+                        th:value="${ville}"
+                ></option>
             </select>
             <span class="span-label">Choisit la region la plus proche </span>
             <div style="display: flex; gap: 10px; align-items: center">
-              <div th:each="region : ${ProfitReponse.valeurs_region()}">
-                <label style="display: flex; align-items: center; gap: 5px">
-                  <input
-                    type="radio"
-                    th:field="*{project.region}"
-                    th:value="${region}"
-                    required
-                  />
-                  <span th:text="${region}"></span>
-                </label>
-              </div>
+                <div th:each="region : ${ProfitReponse.valeurs_region()}">
+                    <label style="display: flex; align-items: center; gap: 5px">
+                        <input
+                                required
+                                th:field="*{project.region}"
+                                th:value="${region}"
+                                type="radio"
+                        />
+                        <span th:text="${region}"></span>
+                    </label>
+                </div>
             </div>
             <input
-              type="number"
-              placeholder="Nombre de participants"
-              th:field="*{project.nombre_participants}"
-              required
+                    placeholder="Nombre de participants"
+                    required
+                    th:field="*{project.nombre_participants}"
+                    type="number"
             />
             <input
-              type="number"
-              placeholder="Nombre de Relations"
-              th:field="*{project.nombre_relations}"
-              required
+                    placeholder="Nombre de Relations"
+                    required
+                    th:field="*{project.nombre_relations}"
+                    type="number"
             />
             <input
-              type="number"
-              placeholder="Tours de Financement"
-              th:field="*{project.tours_financement}"
-              required
+                    placeholder="Tours de Financement"
+                    required
+                    th:field="*{project.tours_financement}"
+                    type="number"
             />
             <input
-              type="number"
-              placeholder="Capitale des Fonds de Financement"
-              th:field="*{project.capitale_fonds}"
-              required
+                    placeholder="Capitale des Fonds de Financement"
+                    required
+                    th:field="*{project.capitale_fonds}"
+                    type="number"
             />
             <span class="span-label">Categorie</span>
             <select
-              class="select-styled"
-              th:field="*{project.categorie}"
-              required
+                    class="select-styled"
+                    required
+                    th:field="*{project.categorie}"
             >
-              <option
-                th:each="categorie : ${Top500Reponse.valeurs_categorie()}"
-                th:value="${categorie}"
-                th:text="${categorie}"
-              ></option>
+                <option
+                        th:each="categorie : ${Top500Reponse.valeurs_categorie()}"
+                        th:text="${categorie}"
+                        th:value="${categorie}"
+                ></option>
             </select>
             <span class="span-label"
-              >Investisseurs Providentiels (Business Angel)</span
+            >Investisseurs Providentiels (Business Angel)</span
             >
             <div style="display: flex; gap: 10px; align-items: center">
-              <div
-                th:each="inv : ${T(ma.advisor.projectadvisor.DTOs.Reponse).values}"
-              >
-                <label style="display: flex; align-items: center; gap: 5px">
-                  <input
-                    type="radio"
-                    th:field="*{project.investisseurs_providentiels}"
-                    th:value="${inv}"
-                    required
-                  />
-                  <span th:text="${inv}"></span>
-                </label>
-              </div>
+                <div
+                        th:each="inv : ${T(ma.advisor.projectadvisor.DTOs.Reponse).values}"
+                >
+                    <label style="display: flex; align-items: center; gap: 5px">
+                        <input
+                                required
+                                th:field="*{project.investisseurs_providentiels}"
+                                th:value="${inv}"
+                                type="radio"
+                        />
+                        <span th:text="${inv}"></span>
+                    </label>
+                </div>
             </div>
             <span class="span-label"
-              >informations pour calculer le profit
+            >informations pour calculer le profit
             </span>
             <input
-              type="number"
-              placeholder="Recherche et Dev"
-              th:field="*{project.rnd}"
-              required
+                    placeholder="Recherche et Dev"
+                    required
+                    th:field="*{project.rnd}"
+                    type="number"
             />
             <input
-              type="number"
-              placeholder="Marketing"
-              th:field="*{project.marketing}"
-              required
+                    placeholder="Marketing"
+                    required
+                    th:field="*{project.marketing}"
+                    type="number"
             />
             <input
-              type="number"
-              placeholder="Administration"
-              th:field="*{project.administration}"
-              required
+                    placeholder="Administration"
+                    required
+                    th:field="*{project.administration}"
+                    type="number"
             />
             <button type="submit"><i class="fas fa-add"></i></button>
-          </form>
-        </div>
-      </div>
+        </form>
     </div>
-    <script th:src="@{/js/script.js}"></script>
-  </body>
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
 </html>

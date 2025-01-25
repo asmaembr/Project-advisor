@@ -102,7 +102,7 @@ def predict_top500():
   if(prediction == 1):
     prediction = "Votre startup peut devenir un des top 500"
   else:
-    prediction = "Votre startup nécessite des améliorations pour devenir un des top 500"
+    prediction = "Votre startup necessite des ameliorations pour devenir un des top 500"
   return jsonify(prediction)
 
 @app.route('/profit', methods=['GET'])

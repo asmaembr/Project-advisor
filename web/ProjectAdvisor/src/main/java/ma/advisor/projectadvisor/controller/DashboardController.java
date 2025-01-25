@@ -11,33 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("/dashboard")
 public class DashboardController {
-
-
-    private List<Project> generateProjects() {
-        List<Project> projects = new ArrayList<>();
-
-        Entrepreneur entrepreneur1 = new Entrepreneur();
-        Entrepreneur entrepreneur2 = new Entrepreneur();
-        projects.add(new Project(1, "name1", "Casablanca", 100, 3, 5000000L, "Technology", "Oui", 50, "Yes", "North", 100000.0, 50000.0, 30000.0, "High", entrepreneur1));
-
-        projects.add(new Project(2, "name2", "Rabat", 50, 2, 2000000L, "Healthcare", "Non", 30, "No", "Central", 80000.0, 30000.0, 20000.0, "Moderate", entrepreneur2));
-
-        projects.add(new Project(3, "name3", "Marrakech", 80, 4, 3000000L, "Tourism", "Non", 40, "Yes", "South", 90000.0, 40000.0, 25000.0, "High", entrepreneur1));
-        projects.add(new Project(4, "name4", "Marrakech", 80, 4, 3000000L, "Tourism", "Non", 40, "Yes", "South", 90000.0, 40000.0, 25000.0, "High", entrepreneur1));
-        projects.add(new Project(5, "name5", "Marrakech", 80, 4, 3000000L, "Tourism", "Non", 40, "Yes", "South", 90000.0, 40000.0, 25000.0, "High", entrepreneur1));
-        projects.add(new Project(6, "name3", "Marrakech", 80, 4, 3000000L, "Tourism", "Non", 40, "Yes", "South", 90000.0, 40000.0, 25000.0, "High", entrepreneur1));
-        projects.add(new Project(7, "name4", "Marrakech", 80, 4, 3000000L, "Tourism", "Non", 40, "Yes", "South", 90000.0, 40000.0, 25000.0, "High", entrepreneur1));
-        projects.add(new Project(8, "name5", "Marrakech", 80, 4, 3000000L, "Tourism", "Non", 40, "Yes", "South", 90000.0, 40000.0, 25000.0, "High", entrepreneur1));
-
-        return projects;
-    }
-
 
     @Autowired
     private AdvisorService advisorService;
@@ -51,7 +27,6 @@ public class DashboardController {
             model.addAttribute("Top500Reponse", advisorProxy.getValeursTop500());
             model.addAttribute("projects", advisorService.getProjects((Entrepreneur) session.getAttribute("user")));
             model.addAttribute("project", new ProjectDTO());
-            model.addAttribute("toast", null);
             return "Dashboard";
         } else {
             model.addAttribute("erreur", "Vous n'avez pas de compte , veillez s'inscrire !!! ");
@@ -86,7 +61,7 @@ public class DashboardController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteProject(HttpSession session, Model model, @PathVariable Integer id) {
+    public String deleteProject(HttpSession session, Model model, @PathVariable Long id) {
         if (session.getAttribute("user") != null) {
             advisorService.deleteProject(id);
             return "redirect:/dashboard";
@@ -97,7 +72,7 @@ public class DashboardController {
     }
 
     @GetMapping("/modify/{id}")
-    public String modifyProject(HttpSession session, Model model, @PathVariable Integer id) {
+    public String modifyProject(HttpSession session, Model model, @PathVariable Long id) {
         if (session.getAttribute("user") != null) {
             model.addAttribute("project", advisorService.getProject(id));
             model.addAttribute("ProfitReponse", advisorProxy.getValeursProfit());
@@ -112,27 +87,23 @@ public class DashboardController {
 
 
     @PostMapping("/profit/{id}")
-    public String profit( Model model  ,@PathVariable  Integer id , HttpSession session) {
+    public String profit( Model model  ,@PathVariable  Long id , HttpSession session) {
         Project projet = advisorService.getProject(id);
-        model.addAttribute("toast", advisorProxy.ProfitPrediction(projet));
-        projet.setProfit(advisorProxy.ProfitPrediction(projet));
-        model.addAttribute("ProfitReponse", advisorProxy.getValeursProfit());
-        model.addAttribute("Top500Reponse", advisorProxy.getValeursTop500());
-        model.addAttribute("projects", advisorService.getProjects((Entrepreneur) session.getAttribute("user")));
-        model.addAttribute("project", new ProjectDTO());
-        return "Dashboard";
+        String profit = advisorProxy.ProfitPrediction(projet).replace("\"","" );
+        model.addAttribute("toast", profit);
+        projet.setProfit(profit);
+        advisorService.saveProject(projet);
+        return "redirect:/dashboard";
     }
 
     @PostMapping("/top500/{id}")
-    public String top500( Model model  ,@PathVariable  Integer id,HttpSession session) {
+    public String top500( Model model  ,@PathVariable  Long id,HttpSession session) {
         Project projet = advisorService.getProject(id);
-        model.addAttribute("toast", advisorProxy.Top500Prediction(projet));
-        projet.setIsTop500(advisorProxy.Top500Prediction(projet));
-        model.addAttribute("ProfitReponse", advisorProxy.getValeursProfit());
-        model.addAttribute("Top500Reponse", advisorProxy.getValeursTop500());
-        model.addAttribute("projects", advisorService.getProjects((Entrepreneur) session.getAttribute("user")));
-        model.addAttribute("project", new ProjectDTO());
-        return "Dashboard";
+        String top500 = advisorProxy.Top500Prediction(projet).replace("\"","" );
+        model.addAttribute("toast",top500);
+        projet.setIsTop500(top500);
+        advisorService.saveProject(projet);
+        return "redirect:/dashboard";
     }
 
 

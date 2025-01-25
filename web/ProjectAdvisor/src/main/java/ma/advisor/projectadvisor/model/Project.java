@@ -2,6 +2,9 @@ package ma.advisor.projectadvisor.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -10,7 +13,7 @@ import lombok.*;
 public class Project{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String name;
     //top 500 study information
     private String ville;
@@ -32,4 +35,8 @@ public class Project{
     //mapping with entrepreneur
     @ManyToOne
     private Entrepreneur entrepreneur;
+
+    @LastModifiedDate
+    private LocalDateTime updatedDate;
+
 }

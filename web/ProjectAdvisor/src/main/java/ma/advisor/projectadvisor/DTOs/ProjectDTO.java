@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class ProjectDTO {
-    private Integer id;
+    private Long id;
     private String name;
     //top 500 study information
     private String ville;
