@@ -47,10 +47,13 @@ Additionally, the system provides an extensible feature for visitors and registe
    ```bash
    cd Project-advisor
    ```
-
 ## Developed By:
 - **Asmae Moubarriz**
 - **Achraf Akrache**
+
+
+## DataFlow Diagram
+![DataFlow Diagram](DataFlow.jpg)
 
 ## Data Index
 
@@ -71,4 +74,4 @@ Additionally, the system provides an extensible feature for visitors and registe
 
 ## Acknowledgements
 
-We would like to thank our advisor and professor **Salma Chrit** for their continuous support and guidance throughout this project.
+We would like to thank our advisor and professor **Salma Chrit** for her continuous support and guidance throughout this project.
