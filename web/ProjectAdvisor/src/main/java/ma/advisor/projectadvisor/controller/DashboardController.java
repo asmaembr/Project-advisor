@@ -20,6 +20,8 @@ public class DashboardController {
     @Autowired
     private AdvisorProxy advisorProxy;
 
+    public static String toast = null;
+    
     @GetMapping
     public String dashboard(HttpSession session, Model model) {
         if (session.getAttribute("user") != null) {
@@ -27,6 +29,7 @@ public class DashboardController {
             model.addAttribute("Top500Reponse", advisorProxy.getValeursTop500());
             model.addAttribute("projects", advisorService.getProjects((Entrepreneur) session.getAttribute("user")));
             model.addAttribute("project", new ProjectDTO());
+            model.addAttribute("toast",toast);
             return "Dashboard";
         } else {
             model.addAttribute("erreur", "Vous n'avez pas de compte , veillez s'inscrire !!! ");
@@ -90,7 +93,7 @@ public class DashboardController {
     public String profit( Model model  ,@PathVariable  Long id , HttpSession session) {
         Project projet = advisorService.getProject(id);
         String profit = advisorProxy.ProfitPrediction(projet).replace("\"","" );
-        model.addAttribute("toast", profit);
+        toast= profit;
         projet.setProfit(profit);
         advisorService.saveProject(projet);
         return "redirect:/dashboard";
@@ -100,7 +103,7 @@ public class DashboardController {
     public String top500( Model model  ,@PathVariable  Long id,HttpSession session) {
         Project projet = advisorService.getProject(id);
         String top500 = advisorProxy.Top500Prediction(projet).replace("\"","" );
-        model.addAttribute("toast",top500);
+        toast= top500;
         projet.setIsTop500(top500);
         advisorService.saveProject(projet);
         return "redirect:/dashboard";

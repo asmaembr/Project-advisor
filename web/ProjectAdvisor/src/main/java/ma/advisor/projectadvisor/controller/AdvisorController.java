@@ -3,6 +3,7 @@ package ma.advisor.projectadvisor.controller;
 import jakarta.servlet.http.HttpSession;
 import ma.advisor.projectadvisor.DTOs.Profile;
 import ma.advisor.projectadvisor.model.Entrepreneur;
+import ma.advisor.projectadvisor.model.Sexe;
 import ma.advisor.projectadvisor.service.AdvisorProxy;
 import ma.advisor.projectadvisor.service.AdvisorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class AdvisorController {
 
 
     @GetMapping
-    public String login(Model model , HttpSession session) {
+    public String login(Model model, HttpSession session) {
         session.removeAttribute("user");
         model.addAttribute("entrepreneur", new Entrepreneur());
         return "LoginRegisterForm";
@@ -45,7 +46,7 @@ public class AdvisorController {
         }
     }
 
-    @PostMapping("logout")
+    @GetMapping("logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
         return "redirect:/";
@@ -63,23 +64,50 @@ public class AdvisorController {
     }
 
     @GetMapping("profile")
-    public String visitor(Model model) {
+    public String profile(Model model, HttpSession session) {
         model.addAttribute("toast", null);
         model.addAttribute("Profile_Valeurs", advisorProxy.getValeursProfile());
         model.addAttribute("range", Arrays.asList(1, 2, 3, 4, 5));
-        model.addAttribute("profile", new Profile());
+        if (session.getAttribute("user") == null) {
+            model.addAttribute("profile", new Profile());
+        } else {
+            Entrepreneur entrepreneur = (Entrepreneur) session.getAttribute("user");
+            Profile profile = new Profile();
+            profile.setAge(entrepreneur.getAge());
+            profile.setEducation(entrepreneur.getEducation());
+            profile.setGenre(entrepreneur.getGender().toString());
+            profile.setTraitsCles(entrepreneur.getTraitCles());
+            model.addAttribute("profile", profile);
+        }
         return "ProfilePredictionForm";
     }
 
 
     @PostMapping("profile")
-    public String visitor(@ModelAttribute Profile profile, Model model) {
+    public String profile(@ModelAttribute Profile profile, Model model , HttpSession session) {
+        if( session.getAttribute("user") != null){
+            Entrepreneur entrepreneur = (Entrepreneur) session.getAttribute("user");
+            entrepreneur.setAge(profile.getAge());
+            entrepreneur.setEducation(profile.getEducation());
+            entrepreneur.setGender(Sexe.valueOf(profile.getGenre()));
+            entrepreneur.setTraitCles(profile.getTraitsCles());
+            advisorService.saveEntrepreneur(entrepreneur);
+        }
+        model.addAttribute("toast", advisorProxy.ProfilePrediction(profile).trim());
         model.addAttribute("Profile_Valeurs", advisorProxy.getValeursProfile());
         model.addAttribute("range", Arrays.asList(1, 2, 3, 4, 5));
         model.addAttribute("profile", profile);
-        model.addAttribute("toast", advisorProxy.ProfilePrediction(profile).trim());
         return "ProfilePredictionForm";
+
     }
 
+    @GetMapping("retour")
+    public String retour(HttpSession session) {
+        if (session.getAttribute("user") != null) {
+            return "redirect:/dashboard";
+        } else {
+            return "redirect:/";
+        }
+    }
 
 }

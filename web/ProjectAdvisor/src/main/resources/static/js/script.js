@@ -10,6 +10,9 @@ loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
 
+
+//toast erreur message
+
 document.addEventListener('DOMContentLoaded', function () {
     const toast = document.getElementById('errorToast');
     if (toast) {
@@ -21,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3000);
     }
 });
+
+// details display
 
 function toggleDetails(button) {
     const details = button.nextElementSibling;

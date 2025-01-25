@@ -14,9 +14,17 @@
 <div class="dashboard">
 
     <div class="project-list">
-        <h2>Liste des Projets</h2>
+        <div class="mini-menu">
+            <a th:href="@{/logout}">
+                <i class="fas fa-door-open"></i>
+            </a>
+            <h2>Liste des Projets</h2>
+                <a th:href="@{/profile}">
+                    <i class="fas fa-user"></i>
+                    Prédire profile
+                </a>
+        </div>
         <div class="project-card" th:each="p : ${projects}">
-            <div id="errorToast" class="toast" th:if="${toast != null}" th:text="${toast}"></div>
             <div class="project-card-header">
                 <h3 th:text="${p.name}"></h3>
                 <a th:href="@{/dashboard/modify/{id}(id=${p.id})}">
@@ -37,43 +45,43 @@
                     </tr>
                     <tr>
                         <td class="span-label">Region</td>
-                        <td th:text="${p.region}"></td>
+                        <td class="span-value" th:text="${p.region}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Nombre de Participants</td>
-                        <td th:text="${p.nombre_participants}"></td>
+                        <td class="span-value" th:text="${p.nombre_participants}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Nombre de Relations</td>
-                        <td th:text="${p.nombre_relations}"></td>
+                        <td class="span-value" th:text="${p.nombre_relations}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Tours de Financement</td>
-                        <td th:text="${p.tours_financement}"></td>
+                        <td class="span-value" th:text="${p.tours_financement}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Capitale des Fonds de Financement</td>
-                        <td th:text="${p.capitale_fonds}"></td>
+                        <td class="span-value" th:text="${p.capitale_fonds}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Categorie</td>
-                        <td th:text="${p.categorie}"></td>
+                        <td class="span-value" th:text="${p.categorie}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Investisseurs Providentiels</td>
-                        <td th:text="${p.investisseurs_providentiels}"></td>
+                        <td class="span-value" th:text="${p.investisseurs_providentiels}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Recherche et Dev</td>
-                        <td th:text="${p.rnd}"></td>
+                        <td class="span-value" th:text="${p.rnd}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Marketing</td>
-                        <td th:text="${p.marketing}"></td>
+                        <td class="span-value" th:text="${p.marketing}"></td>
                     </tr>
                     <tr>
                         <td class="span-label">Administration</td>
-                        <td th:text="${p.administration}"></td>
+                        <td class="span-value" th:text="${p.administration}"></td>
                     </tr>
                 </table>
 
@@ -111,12 +119,12 @@
             <input hidden="hidden" th:field="*{project.id}" type="number"/>
             <input
                     placeholder="Nom du projet"
-                    required
                     th:field="*{project.name}"
                     type="text"
+                    required
             />
             <span class="span-label">Ville</span>
-            <select class="select-styled" required th:field="*{project.ville}">
+            <select class="select-styled" th:field="*{project.ville}" required>
                 <option
                         th:each="ville : ${Top500Reponse.valeurs_ville()}"
                         th:text="${ville}"
@@ -170,8 +178,7 @@
                 <option
                         th:each="categorie : ${Top500Reponse.valeurs_categorie()}"
                         th:text="${categorie}"
-                        th:value="${categorie}"
-                ></option>
+                        th:value="${categorie}"></option>
             </select>
             <span class="span-label"
             >Investisseurs Providentiels (Business Angel)</span

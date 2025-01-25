@@ -166,7 +166,7 @@
         </div>
         <div class="toggle-container">
             <div class="toggle">
-                <div id="errorToast" class="toast" th:if="${toast != null}"> Résultat prêt </div>
+                <div id="errorToast" class="toast" th:if="${toast != null}"> Résultat prêt</div>
                 <div class="toggle-panel toggle-left">
                     <img th:if="${toast==null}" width="48" height="48"
                          src="https://img.icons8.com/color/48/project-management.png"
@@ -192,11 +192,10 @@
                     <h1 th:if="${toast!=null}" th:text="${toast}"></h1>
                     <p th:if="${toast!=null}"> Notre model a pour précision un pourcentage de 59% </p>
                     <button class="hidden" id="register" type="button">Suivant</button>
-                    <a th:href="@{/}">
-                        <button class="hidden" type="button">Revenir à la page de connexion
+                    <a th:href="@{/retour}">
+                        <button class="hidden" type="button">Sortir de la Prédiction du profile entrepreneur
                         </button>
                     </a>
-
                 </div>
             </div>
         </div>
