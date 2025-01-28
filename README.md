@@ -60,18 +60,32 @@ Additionally, the system provides an extensible feature for visitors and registe
 ### TOP 500
 ![TOP 500 Data Visualization](TOP500IMG.png)
 ### TOP 500 Accuracy
-![TOP 500 Data Visualization](TOP500IMG2.png)
+![TOP 500 Data Accuracy](TOP500IMG2.png)
 
 ### Profile Analysis
 ![Profile Data Visualization](PROFILEIMG.png)
 ### Profile Accuracy
-![Profile Data Visualization](PROFILEIMG2.png)
+![Profile Data Accuracy](PROFILEIMG2.png)
 
 ### Profit Estimation
 ![Profit Data Visualization](PROFITIMG.png)
 ### Profit Accuracy
-![Profit Data Visualization](PROFITIMG2.png)
+![Profit Data Accuracy](PROFITIMG2.png)
 
 ## Acknowledgements
 
 We would like to thank our advisor and professor **Salma Chrit** for her continuous support and guidance throughout this project.
+
+## UI/UX
+### Register Form 
+![register](maquettes/register.png)
+### Profile Prediction Form
+![form profile part 1](maquettes/profile1.png)
+![form profile part 2](maquettes/profile2.png)
+### Login Form
+![login](maquettes/login.png)
+### Dashboard Form 
+![dashboard](maquettes/dashboard.png)
+
+### Details of Project with Prediction of TOP 500 and Profit Buttons 
+![details d'un projet](maquettes/details.png)
