@@ -26,7 +26,7 @@ public class AdvisorController {
     private AdvisorProxy advisorProxy;
 
 
-    @GetMapping
+    @GetMapping({"","/", "login"})
     public String login(Model model, HttpSession session) {
         session.removeAttribute("user");
         model.addAttribute("entrepreneur", new Entrepreneur());
@@ -44,12 +44,6 @@ public class AdvisorController {
             model.addAttribute("erreur", "Email ou Mot de passe erroné");
             return "LoginRegisterForm";
         }
-    }
-
-    @GetMapping("logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("user");
-        return "redirect:/";
     }
 
     @PostMapping("register")
@@ -106,7 +100,7 @@ public class AdvisorController {
         if (session.getAttribute("user") != null) {
             return "redirect:/dashboard";
         } else {
-            return "redirect:/";
+            return "redirect:/login";
         }
     }
 

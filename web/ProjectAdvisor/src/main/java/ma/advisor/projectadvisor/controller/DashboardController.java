@@ -55,6 +55,8 @@ public class DashboardController {
             newprojet.setMarketing(project.getMarketing());
             newprojet.setAdministration(project.getAdministration());
             newprojet.setEntrepreneur((Entrepreneur) session.getAttribute("user"));
+            newprojet.setProfit(project.getProfit());
+            newprojet.setIsTop500(project.getIsTop500());
             advisorService.saveProject(newprojet);
             return "redirect:/dashboard";
         } else {

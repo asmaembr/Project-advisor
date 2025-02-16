@@ -15,7 +15,7 @@
 
     <div class="project-list">
         <div class="mini-menu">
-            <a th:href="@{/logout}">
+            <a th:href="@{/login}">
                 <i class="fas fa-door-open"></i>
             </a>
             <h2>Liste des Projets</h2>
@@ -117,6 +117,8 @@
         <form class="project-form-container" method="post" th:action="@{/dashboard/new}">
             <h2>Nouvelle Etude</h2>
             <input hidden="hidden" th:field="*{project.id}" type="number"/>
+            <input hidden="hidden" th:field="*{project.profit}" type="text"/>
+            <input hidden="hidden" th:field="*{project.isTop500}" type="text"/>
             <input
                     placeholder="Nom du projet"
                     th:field="*{project.name}"
